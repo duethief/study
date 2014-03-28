@@ -1,0 +1,51 @@
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'war'
+apply plugin: 'tomcat'
+
+sourceCompatibility = 1.7
+version = '1.0'
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+
+    dependencies {
+        classpath 'org.gradle.api.plugins:gradle-tomcat-plugin:1.2.2'
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    String tomcatVersion = '7.0.47'
+    tomcat "org.apache.tomcat.embed:tomcat-embed-core:${tomcatVersion}"
+    tomcat "org.apache.tomcat.embed:tomcat-embed-logging-juli:${tomcatVersion}"
+    tomcat("org.apache.tomcat.embed:tomcat-embed-jasper:${tomcatVersion}") {
+        exclude group: 'org.eclipse.jdt.core.compiler', module: 'ecj'
+    }
+    providedCompile 'javax.servlet:javax.servlet-api:3.1.0'
+    providedCompile 'javax.websocket:javax.websocket-api:1.0'
+    providedCompile 'javax.servlet:jsp-api:2.0'
+    providedCompile "org.apache.tomcat:tomcat-servlet-api:${tomcatVersion}"
+
+    compile 'org.springframework:spring-context:4.0.2.RELEASE'
+    compile 'org.springframework:spring-context-support:4.0.2.RELEASE'
+    compile 'org.springframework:spring-web:4.0.2.RELEASE'
+    compile 'org.springframework:spring-webmvc:4.0.2.RELEASE'
+    testCompile 'junit:junit:4.11'
+    testCompile 'org.springframework:spring-test:4.0.2.RELEASE'
+}
+
+tomcatRun {
+    contextPath = ""
+    URIEncoding = 'UTF-8'
+    dependsOn war
+}
+
+tomcatRunWar {
+    dependsOn war
+}
