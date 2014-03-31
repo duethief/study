@@ -13,11 +13,8 @@ import org.springframework.web.bind.annotation.RequestParam;
  */
 @Controller
 public class HelloController {
+    @Autowired
     private HelloString helloString;
-
-    public void setHelloString(HelloString helloString) {
-        this.helloString = helloString;
-    }
 
     @RequestMapping(value="hello", method= RequestMethod.GET)
     public String index(@RequestParam(value="name") String name, ModelMap model) {

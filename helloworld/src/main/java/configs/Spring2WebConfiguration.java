@@ -14,16 +14,10 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
  * Created by InSeok on 2014-03-28.
  */
 @Configuration
+@ComponentScan(basePackages = "controllers")
 public class Spring2WebConfiguration extends WebMvcConfigurerAdapter {
     @Bean
     public HelloString helloString() {
         return new HelloString();
-    }
-
-    @Bean
-    public HelloController helloController() {
-        HelloController helloController = new HelloController();
-        helloController.setHelloString(helloString());
-        return helloController;
     }
 }
