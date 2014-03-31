@@ -14,6 +14,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
  * Created by InSeok on 2014-03-28.
  */
 @Configuration
+@EnableWebMvc
 @ComponentScan(basePackages = "controllers")
 public class Spring2WebConfiguration extends WebMvcConfigurerAdapter {
     @Bean
@@ -26,6 +27,7 @@ public class Spring2WebConfiguration extends WebMvcConfigurerAdapter {
         InternalResourceViewResolver internalResourceViewResolver = new InternalResourceViewResolver();
         internalResourceViewResolver.setPrefix("/WEB-INF/view/");
         internalResourceViewResolver.setSuffix(".jsp");
+        internalResourceViewResolver.setOrder(1);
         return internalResourceViewResolver;
     }
 }
