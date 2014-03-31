@@ -19,6 +19,6 @@ public class HelloController {
     @RequestMapping(value="hello", method= RequestMethod.GET)
     public String index(@RequestParam(value="name") String name, ModelMap model) {
         model.addAttribute("message", helloString.sayHello(name));
-        return "/WEB-INF/view/hello.jsp";
+        return "hello";
     }
 }

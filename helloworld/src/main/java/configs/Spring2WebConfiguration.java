@@ -20,4 +20,12 @@ public class Spring2WebConfiguration extends WebMvcConfigurerAdapter {
     public HelloString helloString() {
         return new HelloString();
     }
+
+    @Bean
+    public InternalResourceViewResolver internalResourceViewResolver() {
+        InternalResourceViewResolver internalResourceViewResolver = new InternalResourceViewResolver();
+        internalResourceViewResolver.setPrefix("/WEB-INF/view/");
+        internalResourceViewResolver.setSuffix(".jsp");
+        return internalResourceViewResolver;
+    }
 }
