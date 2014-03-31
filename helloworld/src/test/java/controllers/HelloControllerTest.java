@@ -1,5 +1,6 @@
 package controllers;
 
+import configs.Spring2WebConfiguration;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -24,7 +25,7 @@ import static org.springframework.test.web.servlet.setup.MockMvcBuilders.*;
  */
 @SuppressWarnings("unused")
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:applicationContext.xml", "classpath:spring-servlet.xml"})
+@ContextConfiguration(classes = Spring2WebConfiguration.class)
 @WebAppConfiguration
 public class HelloControllerTest {
     private MockMvc mvc;
