@@ -1,32 +1,27 @@
 package controllers;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import entities.HelloSpring;
+import entities.HelloString;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.Controller;
-
-import java.util.HashMap;
-import java.util.Map;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * Created by InSeok on 2014-03-26.
  */
-public class HelloController implements Controller {
-    private HelloSpring helloSpring;
+@Controller
+public class HelloController {
+    private HelloString helloString;
 
-    public void setHelloSpring(HelloSpring helloSpring) {
-        this.helloSpring = helloSpring;
+    public void setHelloString(HelloString helloString) {
+        this.helloString = helloString;
     }
 
-    @Override
-    public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        String name = request.getParameter("name");
-        String message = helloSpring.sayHello(name);
-        Map<String,Object> model = new HashMap<String, Object>();
-        model.put("message", message);
-        return new ModelAndView("/WEB-INF/view/hello.jsp", model);
+    @RequestMapping(value="hello", method= RequestMethod.GET)
+    public String index(@RequestParam(value="name") String name, ModelMap model) {
+        model.addAttribute("message", helloString.sayHello(name));
+        return "/WEB-INF/view/hello.jsp";
     }
 }
